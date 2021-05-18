@@ -1,9 +1,6 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class OrderItem {
@@ -13,14 +10,34 @@ public class OrderItem {
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @Column(name="ORDER_ID")
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;      // 주문상품
 
-    @Column(name="ITEM_ID")
-    private Long item_Id;
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
+
+//    @Column(name="ORDER_ID")
+//    private Long orderId;
+//
+//    @Column(name="ITEM_ID")
+//    private Long item_Id;
 
     private int orderPrice;
     private int count;
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
 
     public Long getId() {
         return id;
@@ -30,21 +47,21 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getItem_Id() {
-        return item_Id;
-    }
-
-    public void setItem_Id(Long item_Id) {
-        this.item_Id = item_Id;
-    }
+//    public Long getOrderId() {
+//        return orderId;
+//    }
+//
+//    public void setOrderId(Long orderId) {
+//        this.orderId = orderId;
+//    }
+//
+//    public Long getItem_Id() {
+//        return item_Id;
+//    }
+//
+//    public void setItem_Id(Long item_Id) {
+//        this.item_Id = item_Id;
+//    }
 
     public int getOrderPrice() {
         return orderPrice;
@@ -60,5 +77,8 @@ public class OrderItem {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void setOrder(Order order) {
     }
 }
