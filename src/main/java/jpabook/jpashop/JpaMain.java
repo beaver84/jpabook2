@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 
@@ -19,12 +20,11 @@ public class JpaMain {
 
         try{
 
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMember().getId();
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
 
-            Member member = em.find(Member.class, memberId);
-
-            Member findMember = order.getMember();
+            em.persist(book);
 
             tx.commit();
         }catch (Exception e){
